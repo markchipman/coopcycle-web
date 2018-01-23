@@ -40,6 +40,9 @@ class AuthenticationWebSuccessHandler implements AuthenticationSuccessHandlerInt
             return new RedirectResponse($this->router->generate('profile_tasks'));
         }
 
+        if ($token->getUser()->hasRole('ROLE_STORE')) {
+            return new RedirectResponse($this->router->generate('profile_stores'));
+        }
 
         else {
             return new RedirectResponse($request->headers->get('referer'));
